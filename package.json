@@ -1,0 +1,39 @@
+{
+  "name": "markdown-it-beautiful-link",
+  "version": "0.0.1",
+  "packageManager": "pnpm@10.20.0",
+  "description": "link plugin for markdown-it.",
+  "homepage": "https://github.com/naiheyoung/markdown-it-beautiful-link#readme",
+  "author": "Naihe",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "pnpm run clean && tsup"
+  },
+  "keywords": [
+    "markdown",
+    "markdown-it",
+    "markdown-it-plugin",
+    "markdown-it-beautiful-link"
+  ],
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "rimraf": "^6.1.2",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
