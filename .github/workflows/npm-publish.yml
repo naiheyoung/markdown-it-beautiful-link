@@ -9,32 +9,32 @@ on:
     tags:
       - 'v*'
 
-permissions:
-  id-token: write
-  contents: read
-
 jobs:
-  publish:
+  release:
+    permissions:
+      id-token: write
+      contents: write
+
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v5
+      - uses: actions/checkout@v5
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v4
 
-      - name: Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: '22.x'
+          node-version: lts/*
+          cache: pnpm
           registry-url: 'https://registry.npmjs.org'
 
       - run: npm install -g npm@latest
 
-      - run: npm ci
+      - name: Install
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
 
       - name: Publish
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+        run: pnpm publish --access public
