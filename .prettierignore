@@ -1,3 +1,6 @@
+# MacOS
+.DS_Store
+
 # Logs
 logs
 *.log
@@ -102,7 +105,6 @@ dist
 
 # vuepress v2.x temp and cache directory
 .temp
-.cache
 
 # Docusaurus cache and generated files
 .docusaurus
@@ -119,7 +121,8 @@ dist
 # TernJS port file
 .tern-port
 
-# Stores VSCode versions used for testing VSCode extensions
+# VSCode
+.vscode/
 .vscode-test
 
 # yarn v2
@@ -129,4 +132,18 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-__tests__
+# Cloudflare
+.wrangler/
+.dev.vars*
+!.dev.vars.example
+!.env.example
+
+# Vercel
+.vercel/
+
+# Sentry Vite Plugin
+.env.sentry-build-plugin
+
+# aws-cdk
+.cdk.staging
+cdk.out

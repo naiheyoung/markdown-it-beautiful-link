@@ -1,9 +1,22 @@
-## markdown-it-beautiful-link
+import Token from 'markdown-it/lib/token.mjs'
 
-> My own plugin, may crash at any time.<br/>
-> You can view the plugin effect at https://vitue-lite.web.app
+type Capturer = (link: string) => Token[]
 
-```ts
+type CapturersFactory = (
+  createSpan: CreateSpan,
+  createSimpleToken: CreateSimpleToken
+) => Record<string, Capturer>
+
+type CreateSpan = (
+  attrName?: string,
+  attrV?: string,
+  text?: string,
+  additionalToken?: Token,
+  posi?: 'before' | 'after'
+) => Token[]
+
+type CreateSimpleToken = (content: string, type: 'text' | 'html_inline') => Token
+
 interface MarkdownItBeautifulLinkOptions {
   /**
    * provide processing rules for different urls.
@@ -29,4 +42,11 @@ interface MarkdownItBeautifulLinkOptions {
    */
   class: string
 }
-```
+
+export {
+  Capturer,
+  CapturersFactory,
+  CreateSpan,
+  CreateSimpleToken,
+  MarkdownItBeautifulLinkOptions
+}

@@ -9,13 +9,20 @@
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
-  "types": "dist/types/index.d.ts",
+  "types": "dist/index.d.ts",
   "exports": {
-    ".": "./dist/index.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./style": "./dist/index.css"
   },
   "scripts": {
-    "clean": "rimraf dist",
-    "build": "pnpm run clean && tsup"
+    "test": "vitest",
+    "prebuild": "pnpm run format",
+    "build": "tsup",
+    "format": "prettier --write src/",
+    "prepublishOnly": "pnpm build"
   },
   "keywords": [
     "markdown",
@@ -28,10 +35,16 @@
     "README.md"
   ],
   "devDependencies": {
+    "@types/markdown-it": "^14.1.2",
     "@types/node": "^25.0.3",
-    "rimraf": "^6.1.2",
+    "markdown-it": "^14.1.0",
+    "prettier": "^3.7.4",
     "tsup": "^8.5.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.16"
+  },
+  "peerDependencies": {
+    "markdown-it": "^14.1.0"
   },
   "publishConfig": {
     "access": "public"
