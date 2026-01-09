@@ -5,6 +5,10 @@
   "description": "link plugin for markdown-it.",
   "homepage": "https://github.com/naiheyoung/markdown-it-beautiful-link#readme",
   "author": "Naihe",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/naiheyoung/markdown-it-beautiful-link.git"
+  },
   "license": "MIT",
   "type": "module",
   "main": "dist/index.cjs",
