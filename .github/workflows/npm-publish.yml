@@ -8,7 +8,9 @@ on:
       - main
     tags:
       - 'v*'
-  workflow_dispatch: 
+    paths-ignore:
+      - LICENSE
+  workflow_dispatch:
 
 jobs:
   publish:
@@ -39,5 +41,3 @@ jobs:
 
       - name: Publish
         run: pnpm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
