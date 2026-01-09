@@ -40,9 +40,12 @@ jobs:
         run: pnpm build
 
       - name: Configure git
+        env:
+          GIT_USER: ${{vars.GIT_USER}}
+          GIT_EMAIL: ${{vars.GIT_EMAIL}}
         run: |
-          git config --global user.name "${{env.git.GIT_USER}}"
-          git config --global user.email "${{env.git.GIT_EMAIL}}"
+          git config --global user.name "$GIT_USER"
+          git config --global user.email "$GIT_EMAIL"
 
       - name: Publish
         run: pnpm publish --provenance --access public
