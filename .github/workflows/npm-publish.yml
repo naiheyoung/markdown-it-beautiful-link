@@ -12,12 +12,12 @@ on:
       - LICENSE
   workflow_dispatch:
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   publish:
-    permissions:
-      id-token: write
-      contents: write
-
     runs-on: ubuntu-latest
 
     steps:
