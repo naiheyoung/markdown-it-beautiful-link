@@ -22,7 +22,7 @@
     "prebuild": "pnpm run format",
     "build": "tsup",
     "format": "prettier --write src/",
-    "prepublishOnly": "pnpm build"
+    "prepublishOnly": "pnpm build && pnpm version patch"
   },
   "keywords": [
     "markdown",
