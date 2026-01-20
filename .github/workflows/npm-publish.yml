@@ -6,10 +6,6 @@ on:
   push:
     branches:
       - main
-    tags:
-      - 'v*'
-    paths-ignore:
-      - LICENSE
   workflow_dispatch:
 
 permissions:
@@ -17,7 +13,26 @@ permissions:
   contents: read
 
 jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    outputs:
+      is_version: ${{ steps.check.outputs.is_version }}
+    steps:
+      - name: Check commit message
+        id: check
+        run: |
+          COMMIT_MSG="${{ github.event.head_commit.message }}"
+          echo "Commit message: $COMMIT_MSG"
+
+          if echo "$COMMIT_MSG" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "is_version=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "is_version=false" >> "$GITHUB_OUTPUT"
+          fi
+
   publish:
+    needs: check-version
+    if: needs.check-version.outputs.is_version == 'true'
     runs-on: ubuntu-latest
 
     steps:
@@ -32,18 +47,10 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install
-        run: pnpm install
+        run: pnpm i --frozen-lockfile
 
       - name: Build
         run: pnpm build
-
-      - name: Configure git
-        env:
-          GIT_USER: ${{vars.GIT_USER}}
-          GIT_EMAIL: ${{vars.GIT_EMAIL}}
-        run: |
-          git config --global user.name "$GIT_USER"
-          git config --global user.email "$GIT_EMAIL"
 
       - name: Publish
         run: pnpm publish --provenance --access public

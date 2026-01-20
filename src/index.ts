@@ -80,4 +80,11 @@ function beautifulLink(md: MarkdownIt, options?: MarkdownItBeautifulLinkOptions)
   })
 }
 
+export type {
+  Capturer,
+  CapturersFactory,
+  CreateSpan,
+  CreateSimpleToken,
+  MarkdownItBeautifulLinkOptions
+} from './types'
 export default beautifulLink
