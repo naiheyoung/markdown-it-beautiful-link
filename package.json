@@ -1,6 +1,6 @@
 {
   "name": "markdown-it-beautiful-link",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "packageManager": "pnpm@10.28.0",
   "description": "link plugin for markdown-it.",
   "homepage": "https://github.com/naiheyoung/markdown-it-beautiful-link#readme",
